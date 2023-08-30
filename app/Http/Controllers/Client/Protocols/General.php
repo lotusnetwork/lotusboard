@@ -62,7 +62,8 @@ class General
             ['-', '_', ''],
             base64_encode("{$server['cipher']}:{$password}")
         );
-        return "ss://{$str}@{$server['host']}:{$server['port']}#{$name}\r\n";
+        $remote = filter_var($server['host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? '[' . $server['host'] . ']' : $server['host'];
+        return "ss://{$str}@{$remote}:{$server['port']}#{$name}\r\n";
     }
 
     public static function buildVmess($uuid, $server)
