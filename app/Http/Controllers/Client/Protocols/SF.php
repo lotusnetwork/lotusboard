@@ -30,24 +30,36 @@ class SF
         if (!isset($config['outbounds']) || !is_array($config['outbounds'])) {
             $config['outbounds'] = [];
         }
+        $selector = [
+            'type' => 'selector',
+            'tag' => 'select',
+            'interrupt_exist_connections' => true,
+            'outbounds' => []
+        ];
         foreach ($servers as $item) {
             if ($item['type'] === 'shadowsocks') {
                 array_push($config['outbounds'], self::buildShadowsocks($user['uuid'], $item));
+                array_push($selector['outbounds'], $item['name']);
             }
             if ($item['type'] === 'vmess') {
                 if (is_array($item['tags']) && in_array("VLESS", $item['tags'])) {
                     array_push($config['outbounds'], self::buildVless($user['uuid'], $item));
+                    array_push($selector['outbounds'], $item['name']);
                 } else {
                     array_push($config['outbounds'], self::buildVmess($user['uuid'], $item));
+                    array_push($selector['outbounds'], $item['name']);
 	        }
             }
             if ($item['type'] === 'trojan') {
                 array_push($config['outbounds'], self::buildTrojan($user['uuid'], $item));
+                array_push($selector['outbounds'], $item['name']);
             }
             if ($item['type'] === 'hysteria') {
                 array_push($config['outbounds'], self::buildHysteria($user['uuid'], $item));
+                array_push($selector['outbounds'], $item['name']);
             }
         }
+        array_push($config['outbounds'], $selector);
         $config = json_encode($config);
         return $config;
     }
