@@ -4,6 +4,10 @@
         "timestamp": true
     },
     "dns": {
+        "fakeip": {
+            "enabled": true,
+            "inet4_range": "198.18.0.0/15"
+        },
         "servers": [
             {
                 "tag": "dns_proxy",
@@ -21,6 +25,7 @@
         ]
     },
     "route": {
+        "final": "selector",
         "geoip": {
             "download_url": "https://github.com/soffchen/sing-geoip/releases/latest/download/geoip.db"
         },
@@ -37,10 +42,6 @@
                     "private"
                 ],
                 "outbound": "direct"
-            },
-            {
-                "inbound": "tun-in",
-                "outbound": "select"
             }
         ],
         "auto_detect_interface": true
@@ -54,7 +55,7 @@
             "mtu": 1400,
             "auto_route": true,
             "strict_route": true,
-            "stack": "gvisor",
+            "stack": "system",
             "sniff": true,
             "sniff_override_destination": false
         }
