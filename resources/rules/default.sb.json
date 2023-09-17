@@ -17,18 +17,6 @@
                 "address": "https://223.5.5.5/dns-query",
                 "strategy": "ipv4_only",
                 "detour": "direct"
-            },
-            {
-                "tag": "dns_block",
-                "address": "rcode://success"
-            }
-        ],
-        "rules": [
-            {
-                "geosite": [
-                    "private"
-                ],
-                "server": "dns_direct"
             }
         ]
     },
@@ -45,16 +33,14 @@
                 "outbound": "dns-out"
             },
             {
-                "geosite": [
+                "geoip": [
                     "private"
                 ],
                 "outbound": "direct"
             },
             {
-                "geoip": [
-                    "private"
-                ],
-                "outbound": "direct"
+                "inbound": "tun-in",
+                "outbound": "select"
             }
         ],
         "auto_detect_interface": true
