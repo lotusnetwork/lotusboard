@@ -162,6 +162,9 @@ class SF
 //        $array['obfs'] = $server['server_key'];
         $array['up_mbps'] = $server['up_mbps'];
         $array['down_mbps'] = $server['down_mbps'];
+        $array['tls']['enabled'] = true;
+        $array['tls']['utls']['enabled'] = true;
+        $array['tls']['utls']['fingerprint'] = 'firefox';
         if (!empty($server['server_name'])) $array['tls']['server_name'] = $server['server_name'];
         $array['tls']['insecure'] = !empty($server['insecure']) ? true : false;
         return $array;
