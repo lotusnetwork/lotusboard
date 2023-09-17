@@ -11,15 +11,15 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "1.1.1.1",
+                "address": "https://1.0.0.1/dns-query",
                 "address_resolver": "dns_direct",
-                "strategy": "ipv4_only",
-                "detour": "select"
+                "strategy": "prefer_ipv6",
+                "detour": "direct"
             },
             {
                 "tag": "dns_direct",
                 "address": "https://223.5.5.5/dns-query",
-                "strategy": "ipv4_only",
+                "strategy": "prefer_ipv6",
                 "detour": "direct"
             }
         ]
