@@ -78,7 +78,7 @@ class SF
         }
         $array = [];
         $array['tag'] = $server['name'];
-        $array['type'] = 'ss';
+        $array['type'] = 'shadowsocks';
         $array['server'] = $server['host'];
         $array['server_port'] = $server['port'];
         $array['method'] = $server['cipher'];
@@ -171,7 +171,7 @@ class SF
     {
         $array = [];
         $array['tag'] = $server['name'];
-        $array['type'] = 'vmess';
+        $array['type'] = 'vless';
         $array['server'] = $server['host'];
         $array['server_port'] = $server['port'];
         $array['uuid'] = $uuid;
