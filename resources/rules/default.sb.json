@@ -3,6 +3,8 @@
         "level": "info",
         "timestamp": true
     },
+    "type": "selector",
+    "tag": "select",
     "dns": {
         "servers": [
             {
@@ -10,7 +12,7 @@
                 "address": "https://1.1.1.1/dns-query",
                 "address_resolver": "dns_direct",
                 "strategy": "ipv4_only",
-                "detour": "proxy"
+                "detour": "select"
             },
             {
                 "tag": "dns_direct",
@@ -55,7 +57,7 @@
                 "geosite": [
                     "geolocation-!cn"
                 ],
-                "outbound": "proxy"
+                "outbound": "select"
             },
             {
                 "geosite": [
