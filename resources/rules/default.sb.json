@@ -29,12 +29,6 @@
                     "private"
                 ],
                 "server": "dns_direct"
-            },
-            {
-                "outbound": [
-                    "any"
-                ],
-                "server": "dns_direct"
             }
         ]
     },
