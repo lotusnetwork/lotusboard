@@ -20,8 +20,8 @@ class SF
     {
         $servers = $this->servers;
         $user = $this->user;
-        $defaultConfig = base_path() . '/resources/rules/default.sb.json';
-        $customConfig = base_path() . '/resources/rules/custom.sb.json';
+        $defaultConfig = base_path() . '/resources/rules/default.sb.yaml';
+        $customConfig = base_path() . '/resources/rules/custom.sb.yaml';
         if (\File::exists($customConfig)) {
             $config = json_decode(file_get_contents($customConfig), true);
         } else {
@@ -33,7 +33,6 @@ class SF
         $selector = [
             'type' => 'selector',
             'tag' => 'select',
-            'interrupt_exist_connections' => true,
             'outbounds' => []
         ];
         foreach ($servers as $item) {
