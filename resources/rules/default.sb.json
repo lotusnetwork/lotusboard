@@ -25,7 +25,7 @@
         ]
     },
     "route": {
-        "final": "selector",
+        "final": "select",
         "geoip": {
             "download_url": "https://github.com/soffchen/sing-geoip/releases/latest/download/geoip.db"
         },
