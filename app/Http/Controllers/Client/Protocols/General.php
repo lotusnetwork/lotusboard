@@ -98,7 +98,7 @@ class General
         }
         if ((string)$server['network'] === 'ws') {
             $wsSettings = $server['networkSettings'];
-            if (isset($wsSettings['path'])) $config['path'] = "${wsSettings['path']}?ed=4096";
+            if (isset($wsSettings['path'])) $config['path'] = "${wsSettings['path']}?ed=2048";
             if (isset($wsSettings['headers']['Host'])) $config['host'] = $wsSettings['headers']['Host'];
         }
         if ((string)$server['network'] === 'grpc') {
@@ -150,7 +150,7 @@ class General
         if ($server['tls']) {
             $config['fp'] = 'firefox';
             if (is_array($server['tags']) && in_array("VLESS", $server['tags']) && in_array("XTLS", $server['tags'])) {
-                    $config['flow'] = "xtls-rprx-vision-udp443";
+                    $config['flow'] = "xtls-rprx-vision";
             }
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
@@ -166,7 +166,7 @@ class General
         }
         if ((string)$server['network'] === 'ws') {
             $wsSettings = $server['networkSettings'];
-            if (isset($wsSettings['path'])) $config['path'] = "${wsSettings['path']}?ed=4096";
+            if (isset($wsSettings['path'])) $config['path'] = "${wsSettings['path']}?ed=2048";
             if (isset($wsSettings['headers']['Host'])) $config['host'] = $wsSettings['headers']['Host'];
         }
         if ((string)$server['network'] === 'grpc') {

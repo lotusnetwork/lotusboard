@@ -149,11 +149,11 @@ class GCLH
                 $wsSettings = $server['networkSettings'];
                 $array['ws-opts'] = [];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-opts']['path'] = "${wsSettings['path']}?ed=4096";
+                    $array['ws-opts']['path'] = "${wsSettings['path']}?ed=2048";
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-opts']['headers'] = ['Host' => $wsSettings['headers']['Host']];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-path'] = "${wsSettings['path']}?ed=4096";
+                    $array['ws-path'] = "${wsSettings['path']}?ed=2048";
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-headers'] = ['Host' => $wsSettings['headers']['Host']];
             }
@@ -216,7 +216,7 @@ class GCLH
         if ($server['tls']) {
             $array['tls'] = true;
             if (is_array($server['tags']) && in_array("VLESS", $server['tags']) && in_array("XTLS", $server['tags'])) {
-                    $array['flow'] = "xtls-rprx-vision-udp443";
+                    $array['flow'] = "xtls-rprx-vision";
             }
             if ($server['tlsSettings']) {
                 $tlsSettings = $server['tlsSettings'];
@@ -237,11 +237,11 @@ class GCLH
                 $wsSettings = $server['networkSettings'];
                 $array['ws-opts'] = [];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-opts']['path'] = "${wsSettings['path']}?ed=4096";
+                    $array['ws-opts']['path'] = "${wsSettings['path']}?ed=2048";
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-opts']['headers'] = ['Host' => $wsSettings['headers']['Host']];
                 if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-path'] = "${wsSettings['path']}?ed=4096";
+                    $array['ws-path'] = "${wsSettings['path']}?ed=2048";
                 if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
                     $array['ws-headers'] = ['Host' => $wsSettings['headers']['Host']];
             }
