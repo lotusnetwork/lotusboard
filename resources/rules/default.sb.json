@@ -14,7 +14,7 @@
                 "address": "1.1.1.1",
                 "address_resolver": "dns_direct",
                 "strategy": "prefer_ipv6",
-                "detour": "selector"
+                "detour": "select"
             },
             {
                 "tag": "dns_direct",
