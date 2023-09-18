@@ -155,13 +155,20 @@ class SF
     {
      	$array = [];
         $array['tag'] = $server['name'];
-        $array['type'] = 'hysteria';
         $array['server'] = $server['host'];
         $array['server_port'] = $server['port'];
-        $array['auth_str'] = $password;
-//        $array['obfs'] = $server['server_key'];
-        $array['up_mbps'] = $server['up_mbps'];
-        $array['down_mbps'] = $server['down_mbps'];
+         if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+            $array['type'] = 'hysteria2';
+            $array['password'] = $password;
+/*            $array['obfs']['type'] = 'salamander';
+            $array['obfs']['password'] = $server['server_key']; */
+         } else {
+            $array['type'] = 'hysteria';
+            $array['auth_str'] = $password;
+//            $array['obfs'] = $server['server_key'];
+            $array['up_mbps'] = $server['up_mbps'];
+            $array['down_mbps'] = $server['down_mbps'];
+        }
         $array['tls']['enabled'] = true;
         if (!empty($server['server_name'])) $array['tls']['server_name'] = $server['server_name'];
         $array['tls']['insecure'] = !empty($server['insecure']) ? true : false;

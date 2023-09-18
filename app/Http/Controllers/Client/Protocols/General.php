@@ -127,16 +127,25 @@ class General
     {
         $remote = filter_var($server['host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? '[' . $server['host'] . ']' : $server['host'];
      	$name = rawurlencode($server['name']);
-        $query = http_build_query([
-            'protocol' => 'udp',
-            'auth' => $password,
-            'insecure' => $server['insecure'],
-            'peer' => $server['server_name'],
-            'upmbps' => $server['up_mbps'],
-            'downmbps' => $server['up_mbps']
-//            'obfsParam' => $server['server_key']
-        ]);
-        $uri = "hysteria://{$remote}:{$server['port']}?{$query}#{$name}";
+        if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+            $query2 = http_build_query([
+                'insecure' => $server['insecure'],
+                'sni' => $server['server_name']
+    //            'obfs' => $server['server_key']
+            ]);
+            $uri = "hysteria2://{$password}@{$remote}:{$server['port']}/{$query2}#{$name}";
+        } else {
+            $query = http_build_query([
+                'protocol' => 'udp',
+                'auth' => $password,
+                'insecure' => $server['insecure'],
+                'peer' => $server['server_name'],
+                'upmbps' => $server['up_mbps'],
+                'downmbps' => $server['up_mbps']
+    //            'obfsParam' => $server['server_key']
+            ]);
+            $uri = "hysteria://{$remote}:{$server['port']}?{$query}#{$name}";
+        }
         $uri .= "\r\n";
         return $uri;
     }
