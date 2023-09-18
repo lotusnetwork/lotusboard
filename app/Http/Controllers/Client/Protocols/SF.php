@@ -34,7 +34,7 @@ class SF
             'type' => 'selector',
             'tag' => 'select',
             'interrupt_exist_connections' => true,
-            "url": "http://cp.cloudflare.com",
+            "url" => "http://cp.cloudflare.com",
             'outbounds' => []
         ];
         foreach ($servers as $item) {
