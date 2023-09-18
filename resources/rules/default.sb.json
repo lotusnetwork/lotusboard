@@ -11,10 +11,10 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "https://1.0.0.1/dns-query",
+                "address": "1.1.1.1",
                 "address_resolver": "dns_direct",
                 "strategy": "prefer_ipv6",
-                "detour": "direct"
+                "detour": "selector"
             },
             {
                 "tag": "dns_direct",
@@ -22,15 +22,32 @@
                 "strategy": "prefer_ipv6",
                 "detour": "direct"
             }
+        ],
+        "rules": [
+            {
+                "type": "logical",
+                "mode": "and",
+                "rules": [
+                    {
+                        "outbound": "direct",
+                        "invert": true
+                    },
+                    {
+                        "outbound": "any"
+                    }
+                ],
+                "server": "dns_direct",
+                "disable_cache": true
+            }
         ]
     },
     "route": {
         "final": "select",
         "geoip": {
-            "download_url": "https://github.com/soffchen/sing-geoip/releases/latest/download/geoip.db"
+            "download_url": "https://lotusnetwork.github.io/geoip.db"
         },
         "geosite": {
-            "download_url": "https://github.com/soffchen/sing-geosite/releases/latest/download/geosite.db"
+            "download_url": "https://lotusnetwork.github.io/geosite.db"
         },
         "rules": [
             {
