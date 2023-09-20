@@ -41,20 +41,12 @@ class Clash
                 array_push($proxies, $item['name']);
             }
             if ($item['type'] === 'vmess') {
-                if (is_array($item['tags']) && in_array("VLESS", $item['tags'])) {
-                    array_push($proxy, self::buildVless($user['uuid'], $item));
-                    array_push($proxies, $item['name']);
-                } else {
-                    array_push($proxy, self::buildVmess($user['uuid'], $item));
-                    array_push($proxies, $item['name']);
+                array_push($proxy, self::buildVmess($user['uuid'], $item));
+                array_push($proxies, $item['name']);
 	        }
             }
             if ($item['type'] === 'trojan') {
                 array_push($proxy, self::buildTrojan($user['uuid'], $item));
-                array_push($proxies, $item['name']);
-            }
-            if ($item['type'] === 'hysteria') {
-                array_push($proxy, self::buildHysteria($user['uuid'], $item));
                 array_push($proxies, $item['name']);
             }
         }
@@ -183,80 +175,6 @@ class Clash
         $array['udp'] = true;
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
         if (!empty($server['allow_insecure'])) $array['skip-cert-verify'] = ($server['allow_insecure'] ? true : false);
-        return $array;
-    }
-
-    public static function buildHysteria($password, $server)
-    {
-     	$array = [];
-        $array['name'] = $server['name'];
-        $array['type'] = 'hysteria';
-        $array['server'] = $server['host'];
-        $array['port'] = $server['port'];
-        $array['auth_str'] = $password;
-//        $array['obfs'] = $server['server_key'];
-        $array['protocol'] = 'udp';
-        $array['up'] = $server['up_mbps'];
-        $array['down'] = $server['down_mbps'];
-        if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
-        $array['skip-cert-verify'] = !empty($server['insecure']) ? true : false;
-        return $array;
-    }
-
-    public static function buildVless($uuid, $server)
-    {
-        $array = [];
-        $array['name'] = $server['name'];
-        $array['type'] = 'vless';
-        $array['server'] = $server['host'];
-        $array['port'] = $server['port'];
-        $array['uuid'] = $uuid;
-        $array['udp'] = true;
-
-        if ($server['tls']) {
-            $array['tls'] = true;
-            if (is_array($server['tags']) && in_array("VLESS", $server['tags']) && in_array("XTLS", $server['tags'])) {
-                    $array['flow'] = "xtls-rprx-vision";
-            }
-            if ($server['tlsSettings']) {
-                $tlsSettings = $server['tlsSettings'];
-                if (isset($tlsSettings['allowInsecure']) && !empty($tlsSettings['allowInsecure']))
-                    $array['skip-cert-verify'] = ($tlsSettings['allowInsecure'] ? true : false);
-                if (isset($tlsSettings['serverName']) && !empty($tlsSettings['serverName']))
-                    $array['servername'] = $tlsSettings['serverName'];
-            }
-        }
-        if ($server['network'] === 'tcp') {
-            $tcpSettings = $server['networkSettings'];
-            if (isset($tcpSettings['header']['type'])) $array['network'] = $tcpSettings['header']['type'];
-            if (isset($tcpSettings['header']['request']['path'][0])) $array['http-opts']['path'] = $tcpSettings['header']['request']['path'][0];
-        }
-        if ($server['network'] === 'ws') {
-            $array['network'] = 'ws';
-            if ($server['networkSettings']) {
-                $wsSettings = $server['networkSettings'];
-                $array['ws-opts'] = [];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-opts']['path'] = "${wsSettings['path']}?ed=2048";
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
-                    $array['ws-opts']['headers'] = ['Host' => $wsSettings['headers']['Host']];
-                if (isset($wsSettings['path']) && !empty($wsSettings['path']))
-                    $array['ws-path'] = "${wsSettings['path']}?ed=2048";
-                if (isset($wsSettings['headers']['Host']) && !empty($wsSettings['headers']['Host']))
-                    $array['ws-headers'] = ['Host' => $wsSettings['headers']['Host']];
-            }
-            $array['max-early-data'] = 2048;
-            $array['early-data-header-name'] = 'Sec-WebSocket-Protocol';
-        }
-        if ($server['network'] === 'grpc') {
-            $array['network'] = 'grpc';
-            if ($server['networkSettings']) {
-                $grpcSettings = $server['networkSettings'];
-                $array['grpc-opts'] = [];
-                if (isset($grpcSettings['serviceName'])) $array['grpc-opts']['grpc-service-name'] = $grpcSettings['serviceName'];
-            }
-        }
-
         return $array;
     }
 

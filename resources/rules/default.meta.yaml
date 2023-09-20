@@ -3,16 +3,24 @@ allow-lan: false
 mode: rule
 log-level: info
 ipv6: true
+global-client-fingerprint: firefox
+sniffer:
+  enable: true
+  override-destination: true
+  sniffing:
+    - tls
+    - http
 proxy-groups:
     - { name: Switcher, type: select, proxies: ['Auto'] }
     - { name: Auto, type: fallback, proxies: [], url: "http://cp.cloudflare.com/", interval: 7200 }
 dns:
     enable: true
     listen: 0.0.0.0:8853
+#    enhanced-mode: redir-host
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     use-hosts: true
-    nameserver: ['tls://1.0.0.1']
+    nameserver: ['1.1.1.1#Switcher', '1.0.0.1#Switcher']
     proxy-server-nameserver: ['dhcp://en0', '8.8.8.8']
     ipv6: true
 rules:
@@ -25,6 +33,8 @@ rules:
     - 'IP-CIDR,100.64.0.0/10,DIRECT'
     - 'IP-CIDR,224.0.0.0/4,DIRECT'
     - 'IP-CIDR6,fe80::/10,DIRECT'
+    - 'GEOSITE,gfw,Switcher'
+    - 'GEOSITE,CN,DIRECT'
     - 'GEOIP,CN,DIRECT'
     - 'MATCH,Switcher'
 proxies:

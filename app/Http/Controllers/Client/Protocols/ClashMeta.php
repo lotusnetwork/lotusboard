@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Client\Protocols;
 use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
-class GCLH
+class ClashMeta
 {
-    public $flag = 'gclh';
+    public $flag = 'meta';
     private $servers;
     private $user;
 
@@ -25,8 +25,8 @@ class GCLH
         header("subscription-userinfo: upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}");
         header('profile-update-interval: 24');
         header("content-disposition:attachment;filename*=UTF-8''".rawurlencode($appName));
-        $defaultConfig = base_path() . '/resources/rules/vpn.meta.yaml';
-        $customConfig = base_path() . '/resources/rules/customvpn.meta.yaml';
+        $defaultConfig = base_path() . '/resources/rules/default.meta.yaml';
+        $customConfig = base_path() . '/resources/rules/custom.meta.yaml';
         if (\File::exists($customConfig)) {
             $config = Yaml::parseFile($customConfig);
         } else {
