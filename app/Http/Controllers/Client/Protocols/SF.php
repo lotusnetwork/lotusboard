@@ -83,6 +83,14 @@ class SF
         $array['server_port'] = $server['port'];
         $array['method'] = $server['cipher'];
         $array['password'] = $password;
+        if ($server['obfs']) {
+            $array['plugin'] = 'obfs-local';
+            if ($server['obfs_settings']['host']) {
+                $array['plugin_opts'] = "obfs=http;obfs-host={$server['obfs_settings']['host']}";
+            } else {
+                $array['plugin_opts'] = "obfs=http"
+            }
+        }
         return $array;
     }
 

@@ -95,6 +95,12 @@ class Surfboard
             'tfo=true',
             'udp-relay=true'
         ];
+        if ($server['obfs']) {
+            $config['obfs'] = 'http';
+            if ($server['obfs_settings']['host']) {
+                $config['obfs-host'] = $server['obfs_settings']['host'];
+            }
+        }
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";

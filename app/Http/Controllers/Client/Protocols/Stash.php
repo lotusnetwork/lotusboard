@@ -112,6 +112,13 @@ class Stash
         $array['cipher'] = $server['cipher'];
         $array['password'] = $password;
         $array['udp'] = true;
+        if ($server['obfs']) {
+            $array['plugin'] = 'obfs';
+            $array['plugin-opts']['mode'] = 'http';
+            if ($server['obfs_settings']['host']) {
+                $array['plugin-opts']['host'] = $server['obfs_settings']['host'];
+            }
+        }
         return $array;
     }
 

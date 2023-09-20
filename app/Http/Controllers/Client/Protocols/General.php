@@ -63,7 +63,15 @@ class General
             base64_encode("{$server['cipher']}:{$password}")
         );
         $remote = filter_var($server['host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? '[' . $server['host'] . ']' : $server['host'];
-        return "ss://{$str}@{$remote}:{$server['port']}#{$name}\r\n";
+        if ($server['obfs']) {
+            if ($server['obfs_settings']['host']) {
+                return "ss://{$str}@{$remote}:{$server['port']}/?plugin=obfs-local;obfs=http;obfs-host={$server['obfs_settings']['host']}#{$name}\r\n";
+            } else {
+                return "ss://{$str}@{$remote}:{$server['port']}/?plugin=obfs-local;obfs=http#{$name}\r\n";
+            }
+        } else {
+            return "ss://{$str}@{$remote}:{$server['port']}#{$name}\r\n";
+        }
     }
 
     public static function buildVmess($uuid, $server)

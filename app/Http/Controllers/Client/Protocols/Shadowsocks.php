@@ -64,6 +64,14 @@ class Shadowsocks
             "password" => $password,
             "method" => $server['cipher']
         ];
+        if ($server['obfs']) {
+            $config['plugin'] = 'obfs-local';
+            if ($server['obfs_settings']['host']) {
+                $config['plugin-opts'] = "obfs=http;obfs-host={$server['obfs_settings']['host']}";
+            } else {
+                $config['plugin-opts'] = "obfs=http";
+            }
+        }
         return $config;
     }
 }
