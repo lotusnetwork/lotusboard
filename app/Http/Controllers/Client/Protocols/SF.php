@@ -88,7 +88,7 @@ class SF
             if ($server['obfs_settings']['host']) {
                 $array['plugin_opts'] = "obfs=http;obfs-host={$server['obfs_settings']['host']}";
             } else {
-                $array['plugin_opts'] = "obfs=http"
+                $array['plugin_opts'] = "obfs=http";
             }
         }
         return $array;
