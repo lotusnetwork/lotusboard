@@ -141,7 +141,7 @@ class General
                 'sni' => $server['server_name']
     //            'obfs' => $server['server_key']
             ]);
-            $uri = "hysteria2://{$password}@{$remote}:{$server['port']}/{$query2}#{$name}";
+            $uri = "hysteria2://{$password}@{$remote}:{$server['port']}/?{$query2}#{$name}";
         } else {
             $query = http_build_query([
                 'protocol' => 'udp',
