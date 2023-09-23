@@ -197,14 +197,21 @@ class ClashMeta
     {
      	$array = [];
         $array['name'] = $server['name'];
-        $array['type'] = 'hysteria';
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
-        $array['auth_str'] = $password;
-//        $array['obfs'] = $server['server_key'];
-        $array['protocol'] = 'udp';
-        $array['up'] = $server['up_mbps'];
-        $array['down'] = $server['down_mbps'];
+        if (is_array($item['tags']) && in_array("hy2", $item['tags'])) {
+            $array['type'] = 'hysteria2';
+            $array['password'] = $password;
+            //$array['obfs'] = 'salamander';
+            //$array['obfs-password'] = $server['server_key'];
+        } else {
+            $array['type'] = 'hysteria';
+            $array['auth_str'] = $password;
+            // $array['obfs'] = $server['server_key'];
+            $array['up'] = $server['up_mbps'];
+            $array['down'] = $server['down_mbps'];
+            $array['protocol'] = 'udp';
+        }
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
         $array['skip-cert-verify'] = !empty($server['insecure']) ? true : false;
         return $array;
