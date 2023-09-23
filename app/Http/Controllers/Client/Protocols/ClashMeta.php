@@ -199,7 +199,7 @@ class ClashMeta
         $array['name'] = $server['name'];
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
-        if (is_array($item['tags']) && in_array("hy2", $item['tags'])) {
+        if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
             $array['type'] = 'hysteria2';
             $array['password'] = $password;
             //$array['obfs'] = 'salamander';
