@@ -8,12 +8,13 @@ The enhanced v2board
 
 Hysteria
  - Multiple bugs fixed
+ - Support hysteria2
 
 VLESS
  - Add vless support
  - Multi GUN mode on grpc
  - other stuffs that Vmess has
- - XTLS supported
+ - VLESS flow supported
 
 Vmess 
  - TLS fingerprint, firefox by default
