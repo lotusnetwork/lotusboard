@@ -11,8 +11,6 @@ dns:
   enable: true
   listen: 0.0.0.0:8853
   ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -20,11 +18,10 @@ dns:
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - https://119.29.29.29/dns-query
+    - https://223.5.5.5/dns-query
   fallback:
-    - https://doh.dns.sb/dns-query
-    - https://dns.cloudflare.com/dns-query
+    - https://1.0.0.1/dns-query
     - https://dns.twnic.tw/dns-query
     - tls://8.8.4.4:853
   fallback-filter:
