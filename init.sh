@@ -3,8 +3,8 @@
 rm -rf composer.phar
 wget https://github.com/composer/composer/releases/latest/download/composer.phar -O composer.phar
 php composer.phar install -vvv
-while true
 counter=1
+while true
 do
   if curl mysql:3306 2>&1 | grep -qs "Received HTTP/0.9 when not allowed"; then
     echo "Continue to lotusboard setup"
