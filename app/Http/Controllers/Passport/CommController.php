@@ -34,7 +34,7 @@ class CommController extends Controller
             }
         }
         $email = $request->input('email');
-        if (preg_match('/(@[a-zA-Z0-9.-]+)*(.)*12377.cn)|(@[a-zA-Z0-9.-]+)*(.)*gov.cn)/', $email)) {
+        if (str_contains($email, 'gov.cn') || str_contains($email, '12377.cn')) {
             abort(500, __('Something broken, please retry this action later'));
         }
         if (Cache::get(CacheKey::get('LAST_SEND_EMAIL_VERIFY_TIMESTAMP', $email))) {
