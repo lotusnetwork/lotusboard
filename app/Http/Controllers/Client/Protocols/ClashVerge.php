@@ -54,8 +54,11 @@ class ClashVerge
                 array_push($proxies, $item['name']);
             }
             if ($item['type'] === 'hysteria') {
-                array_push($proxy, self::buildHysteria($user['uuid'], $item));
-                array_push($proxies, $item['name']);
+                if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+                } else {
+                    array_push($proxy, self::buildHysteria($user['uuid'], $item));
+                    array_push($proxies, $item['name']);
+                }
             }
         }
 
@@ -195,13 +198,13 @@ class ClashVerge
 
     public static function buildHysteria($password, $server)
     {
-        if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+        //if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
             // PFF
             //$array['type'] = 'hysteria2';
             //$array['password'] = $password;
             //$array['obfs'] = 'salamander';
             //$array['obfs-password'] = $server['server_key'];
-        } else {
+        //} else {
             $array = [];
             $array['name'] = $server['name'];
             $array['server'] = $server['host'];
@@ -213,7 +216,7 @@ class ClashVerge
             $array['up'] = $server['up_mbps'];
             $array['down'] = $server['down_mbps'];
             $array['protocol'] = 'udp';
-        }
+        //}
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
         $array['skip-cert-verify'] = !empty($server['insecure']) ? true : false;
         return $array;
