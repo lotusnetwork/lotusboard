@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Client\Protocols;
 use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
-class ClashVerge
+class ClashMetaForAndroid
 {
-    public $flag = 'verge';
+    public $flag = 'clashmetaforandroid';
     private $servers;
     private $user;
 
