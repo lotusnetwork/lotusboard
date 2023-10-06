@@ -54,7 +54,7 @@ class ClashVerge
                 array_push($proxies, $item['name']);
             }
             if ($item['type'] === 'hysteria') {
-                if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+                if (is_array($item['tags']) && in_array("hy2", $item['tags'])) {
                 } else {
                     array_push($proxy, self::buildHysteria($user['uuid'], $item));
                     array_push($proxies, $item['name']);
