@@ -118,7 +118,7 @@ class UniProxyController extends Controller
                     'server_name' => $this->nodeInfo->server_name,
                     'up_mbps' => $this->nodeInfo->up_mbps,
                     'down_mbps' => $this->nodeInfo->down_mbps,
-                    'obfs' => Helper::getServerKey($this->nodeInfo->created_at, 16)
+                    #'obfs' => Helper::getServerKey($this->nodeInfo->created_at, 16)
                 ];
                 break;
         }
