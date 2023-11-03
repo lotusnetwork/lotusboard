@@ -214,7 +214,7 @@ class ClashVerge
             $array['up'] = $server['up_mbps'];
             $array['down'] = $server['down_mbps'];
             $array['protocol'] = 'udp';
-        //}
+        }
         if (!empty($server['server_name'])) $array['sni'] = $server['server_name'];
         $array['skip-cert-verify'] = !empty($server['insecure']) ? true : false;
         return $array;
