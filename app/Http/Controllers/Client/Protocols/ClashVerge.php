@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client\Protocols;
 use App\Utils\Helper;
 use Symfony\Component\Yaml\Yaml;
 
+// A copy of ClashMeta.php
+
 class ClashVerge
 {
     public $flag = 'verge';
@@ -54,11 +56,8 @@ class ClashVerge
                 array_push($proxies, $item['name']);
             }
             if ($item['type'] === 'hysteria') {
-                if (is_array($item['tags']) && in_array("hy2", $item['tags'])) {
-                } else {
-                    array_push($proxy, self::buildHysteria($user['uuid'], $item));
-                    array_push($proxies, $item['name']);
-                }
+                array_push($proxy, self::buildHysteria($user['uuid'], $item));
+                array_push($proxies, $item['name']);
             }
         }
 
@@ -198,18 +197,17 @@ class ClashVerge
 
     public static function buildHysteria($password, $server)
     {
-        //if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
-            // PFF
-            //$array['type'] = 'hysteria2';
-            //$array['password'] = $password;
+        $array = [];
+        $array['name'] = $server['name'];
+        $array['server'] = $server['host'];
+        $array['port'] = $server['port'];
+        $array['udp'] = true;
+        if (is_array($server['tags']) && in_array("hy2", $server['tags'])) {
+            $array['type'] = 'hysteria2';
+            $array['password'] = $password;
             //$array['obfs'] = 'salamander';
             //$array['obfs-password'] = $server['server_key'];
-        //} else {
-            $array = [];
-            $array['name'] = $server['name'];
-            $array['server'] = $server['host'];
-            $array['port'] = $server['port'];
-            $array['udp'] = true;
+        } else {
             $array['type'] = 'hysteria';
             $array['auth_str'] = $password;
             // $array['obfs'] = $server['server_key'];
