@@ -20,7 +20,7 @@ dns:
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     use-hosts: true
-    nameserver: ['1.1.1.1#Switcher', '1.0.0.1#Switcher']
+    nameserver: ['8.8.8.8#Switcher', '1.1.1.1#Switcher', '1.0.0.1#Switcher']
     proxy-server-nameserver: ['dhcp://en0', '8.8.8.8']
     ipv6: true
 rules:
