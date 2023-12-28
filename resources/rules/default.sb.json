@@ -47,6 +47,10 @@
       {
         "ip_is_private": true,
         "outbound": "direct"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
       }
     ],
     "auto_detect_interface": true
