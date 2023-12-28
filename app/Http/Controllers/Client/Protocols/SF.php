@@ -33,7 +33,7 @@ class SF
         $selector = [
             'type' => 'selector',
             'tag' => 'select',
-//            'interrupt_exist_connections' => true,
+            'interrupt_exist_connections' => true,
             'outbounds' => []
         ];
         foreach ($servers as $item) {
