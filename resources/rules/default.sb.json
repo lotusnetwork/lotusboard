@@ -1,102 +1,90 @@
 {
-    "log": {
-        "level": "info",
-        "timestamp": true
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15"
     },
-    "dns": {
-        "fakeip": {
-            "enabled": true,
-            "inet4_range": "198.18.0.0/15"
-        },
-        "servers": [
-            {
-                "tag": "dns_proxy",
-                "address": "1.1.1.1",
-                "address_resolver": "dns_direct",
-                "strategy": "prefer_ipv6",
-                "detour": "select"
-            },
-            {
-                "tag": "dns_direct",
-                "address": "https://223.5.5.5/dns-query",
-                "strategy": "prefer_ipv6",
-                "detour": "direct"
-            }
-        ],
-        "rules": [
-            {
-                "type": "logical",
-                "mode": "and",
-                "rules": [
-                    {
-                        "outbound": "direct",
-                        "invert": true
-                    },
-                    {
-                        "outbound": "any"
-                    }
-                ],
-                "server": "dns_direct",
-                "disable_cache": true
-            }
-        ]
-    },
-    "route": {
-        "final": "select",
-        "geoip": {
-            "download_url": "https://lotusnetwork.github.io/geoip.db"
-        },
-        "geosite": {
-            "download_url": "https://lotusnetwork.github.io/geosite.db"
-        },
-        "rules": [
-            {
-                "protocol": "dns",
-                "outbound": "dns-out"
-            },
-            {
-                "geoip": [
-                    "private"
-                ],
-                "outbound": "direct"
-            }
-        ],
-        "auto_detect_interface": true
-    },
-    "inbounds": [
-        {
-            "type": "tun",
-            "tag": "tun-in",
-            "inet4_address": "172.19.0.1/30",
-            "inet6_address": "fdfe:dcba:9876::1/126",
-            "mtu": 1400,
-            "auto_route": true,
-            "strict_route": true,
-            "stack": "system",
-            "sniff": true,
-            "sniff_override_destination": false
-        }
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "1.1.1.1",
+        "address_resolver": "dns_direct",
+        "strategy": "prefer_ipv6",
+        "detour": "select"
+      },
+      {
+        "tag": "dns_direct",
+        "address": "https://223.5.5.5/dns-query",
+        "strategy": "prefer_ipv6",
+        "detour": "direct"
+      }
     ],
-    "outbounds": [
-        {
-            "type": "direct",
-            "tag": "direct"
-        },
-        {
-            "type": "block",
-            "tag": "block"
-        },
-        {
-            "type": "dns",
-            "tag": "dns-out"
-        }
+    "rules": [
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "outbound": "direct",
+            "invert": true
+          },
+          {
+            "outbound": "any"
+          }
+        ],
+        "server": "dns_direct",
+        "disable_cache": true
+      }
+    ]
+  },
+  "route": {
+    "final": "select",
+    "rules": [
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
     ],
-    "experimental"  : {
-        "cache_file": {
-            "enabled": true,
-            "path": "cache.db",
-            "cache_id": "default",
-            "store_fakeip": false
-        }
+    "auto_detect_interface": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.19.0.1/30",
+      "inet6_address": "fdfe:dcba:9876::1/126",
+      "mtu": 1500,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true,
+      "sniff_override_destination": false
     }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "cache.db",
+      "cache_id": "default",
+      "store_fakeip": false
+    }
+  }
 }
