@@ -91,17 +91,20 @@ class UniProxyController extends Controller
                 }
                 break;
             case 'vmess':
-                $response = [
-                    'server_port' => $this->nodeInfo->server_port,
-                    'network' => $this->nodeInfo->network,
-                    'networkSettings' => $this->nodeInfo->networkSettings,
-                    'tls' => $this->nodeInfo->tls
-                ];
-
-                if (is_array($this->nodeInfo->tags) && in_array("VLESS", $this->nodeInfo->tags)) {
-                    $response['vless'] = true;
+                if ($request->input('node_type') === 'vless') {
+                    $response = [
+                        'server_port' => $this->nodeInfo->server_port,
+                        'network' => $this->nodeInfo->network,
+                        'network_settings' => $this->nodeInfo->networkSettings,
+                        'tls' => $this->nodeInfo->tls
+                    ];
                 } else {
-                    $response['vless'] = false;
+                    $response = [
+                        'server_port' => $this->nodeInfo->server_port,
+                        'network' => $this->nodeInfo->network,
+                        'networkSettings' => $this->nodeInfo->networkSettings,
+                        'tls' => $this->nodeInfo->tls
+                    ];
                 }
                 break;
             case 'trojan':
